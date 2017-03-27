@@ -1,0 +1,441 @@
+
+<!doctype html>
+<html ng-app="app">
+<head>
+<meta charset="utf-8">
+<title>【北京二手车_北京个人二手车_北京二手车交易市场】-人人车</title>
+<link href="css/base.css" rel="stylesheet"/>
+<link href="css/common.css" rel="stylesheet"/>
+<link href="css/index.css" rel="stylesheet"/>
+<link href="iconfont/iconfont.css" rel="stylesheet"/>
+<script src="js/angular.js"></script>
+<!--<script  src="js/jquery-1.7.2.js"></script>-->
+<script  src="js/index.js"></script>
+<script type="text/ng-template" id="gushi.html">
+    <ul class="clearfix" >
+        <li ng-repeat="i in gushi">
+            <div class="cont">
+                <img src="{{i.src}}" alt=""/>
+                <div class="test">
+                    <h4>{{i.title}}</h4>
+                    <p class="p1">{{i.msg}}</p>
+                </div>
+            </div>
+            <div class="cont right">
+                <img src="{{i.src1}}" alt=""/>
+                <div class="test">
+                    <h4>{{i.title1}}</h4>
+                    <p class="p1">{{i.msg1}}</p>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</script>
+</head>
+<body ng-controller="test">
+<div class="denglu" ng-show="b">
+    <h3>登录人人车</h3>
+    <input type="text" placeholder="请输入用户名" ng-model="t1" >
+    <input type="text" placeholder="请输入密码" ng-model="t2">
+    <input type="button" value="登录" ng-click="login()">
+    <a ng-click="b=false">x</a>
+</div>
+<div class="zhuce denglu" ng-show="c">
+    <h3>注册人人车</h3>
+    <input type="text" placeholder="请输入用户名" ng-model="t3" >
+    <input type="text" placeholder="请输入密码" ng-model="t4">
+    <input type="text" placeholder="请输入年龄" ng-model="t5" >
+    <input type=" text" placeholder="请输入性别" ng-model="t6" >
+    <input type="button" value="立即注册" ng-click="sign()">
+    <a ng-click="c=false">x</a>
+</div>
+
+<div class="mengban" ng-show="c"></div>
+<div class="mengban" ng-show="b"></div>
+<div class="header">
+    <div  class="inner">
+        <h1><a>人人车</a></h1>
+        <ul class="nav">
+            <li class="quyu" >
+                <a ><a href="#">{{city}}</a><i class="iconfont icon-xiala"></i>
+                <div class="choose-city">
+                    <div class="top1 clearfix">
+                        <a href="#"   class="juse">周边</a><a href="#" >热门</a>
+                        <a href="#" ng-repeat="item in arr|orderBy:'shouzimu'">{{item.shouzimu}}</a>
+                    </div>
+                    <div class="bottom">
+                        <div class="cont-remen">
+                            <div class=" clearfix cont1">
+                                <h3><a href="#" class="juse">周边</a></h3>
+                                <div class="cont1-1">
+                                    <a href="#" ng-repeat="i in arrZB" ng-click="getcity(i)" >{{i}}</a>
+                                </div>
+                            </div>
+                            <div class="cont1 clearfix">
+                                <h3><a href="#" class="juse">热门</a></h3>
+                                <div class="cont1">
+                                    <a href="#" ng-repeat="i in arrRM"ng-click="getcity(i)">{{i}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont-remen cont-city ">
+                            <div class="cont1 clearfix" ng-repeat="item in arr|orderBy:'shouzimu'">
+                                <h3><a href="#">{{item.shouzimu}}</a></h3>
+                                <div class="cont1-1">
+                                    <a href="#"ng-repeat="i in item.name" ng-click="getcity(i)" >{{i}}</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <p class="yabian"></p>
+            </li>
+            <li><a href="#">买车</a> </li>
+            <li class="maiche"><a href="">卖车</a><p class="p1">技术卖车</p> </li>
+            <li><a href="#">找车</a> </li>
+            <li><a href="#">论坛</a> </li>
+            <li><a href="#">服务保障</a> </li>
+            <li><a href="#"><img src="img/a2.jpg" alt=""/> </a> </li>
+        </ul>
+        <div class="loginbar">
+            <a class="deng" href="" ng-click="b=!b"><i class="iconfont icon-iconfontwodea-copy" ></i> 登录</a>
+            <p class="dianhua" ng-click="c=!c"><i class="iconfont icon-dianhua juse"  ></i>注册400-091-3019</p>
+        </div>
+    </div>
+</div>
+<!--轮播图-->
+<div class="banner"  ng-mouseout="tab1()"  ng-mouseover="tab2()">
+    <ul >
+        <li ng-repeat="item in data" style="background: {{item.beijing}}" class="hide" ng-class="{show:$index==active}" >
+            <a href="{{item.href}}">
+            <img src="{{item.src}}" alt=""/>
+            </a>
+        </li>
+
+    </ul>
+    <div class="inner" style="position: absolute;">
+        <ol>
+            <li  ng-repeat="item in data" ng-class="{active:$index==active}" ng-mouseover="tab($index)">{{item.title}}</li>
+
+        </ol>
+    </div>
+
+</div>
+
+
+<div class="page1 inner clearfix">
+    <div  class="left">
+        <img src="img/a3.jpg" alt="">
+        <ul>
+            <li>
+                <i class="iconfont icon-shoucang"></i>
+                <a href="#" ng-repeat="i in arrBrandhot">{{i}}</a>
+                <div class="brand" ng-mouseover="m=!m" ng-mouseout="m=!m"><a href="#"  >更多<b class="iconfont icon-weibiaoti1fuzhi04"></b></a>
+                    <!--更多的下拉框-->
+                    <em ng-show="m">∧</em>
+                    <div class="bannermore" ng-show="m">
+                        <ul>
+                            <li class="clearfix" ng-repeat="i in arrBrand1">
+                                <h3>{{i.shouzim}}</h3>
+                                <div class="cont">
+                                    <a href="#" ng-repeat="i in i.name">{{i}}</a>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <ul class="ul1">
+                            <li class="clearfix" ng-repeat="i in arrBrand2">
+                                <h3>{{i.shouzim}}</h3>
+                                <div class="cont">
+                                    <a href="#" ng-repeat="i in i.name">{{i}}</a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-yuanbao"></i>
+                <a href="#" ng-repeat="item in arrjiage">{{item}}</a>
+            </li>
+            <li>
+                <i class="iconfont icon-biaoqian"></i>
+                <a href="#" ng-repeat="item in arrxhao">{{item}}</a>
+            </li>
+            <li class="search" ng-class="{active:d}">
+                <input class="inp1" type="text"  placeholder="请输入关键词，如：别克1.6L" ng-focus="d=true" ng-blur="d=false" ng-model="t7" ng-keyup="xiala()">
+                <input class="inp2" type="button" ng-class="{active:d}"><b class="iconfont icon-search"></b>
+                <ul class="search-xiala">
+                    <li ng-repeat="item in arrBrand">{{item}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="right">
+        <img src="img/a4.jpg" alt="">
+        <div class="right1">
+            <p class="p1"><b>快速卖车</b> 已有<span class="juse">224714</span>人成功卖车</p>
+            <input type="text" class="inp1" value="手机号码（必填）"><br>
+            <input type="button" class="inp2" value="帮我卖车">
+            <div class="p2"><p class="b">后续计划</p> <p><i></i>团购新车</p>  </p><i></i>买二手车</p>  </p><i></i>不买车</p></div>
+        </div>
+    </div>
+</div>
+
+<div class="page2">
+    <div class="inner clearfix">
+         <div  class="page2-1">
+             <h3>分期购车</h3>
+             <p>0首付，门槛低，放款快</p>
+             <img src="img/a5.png" alt=""/>
+         </div>
+        <div  class="page2-1">
+            <h3>帮我找车</h3>
+            <p>满足您的个性化需求</p>
+            <img src="img/a7_2.png" alt=""/>
+        </div>
+        <div  class="page2-1">
+            <h3>关注微信</h3>
+            <p>第一手好车咨询，惊喜多多......</p>
+            <img src="img/a7_1.png" alt=""/>
+        </div>
+        <div class="page2-2">
+            <div class="title clearfix">
+                <h2>
+                    论坛
+                    <p>车友说</p>
+                </h2>
+                <a href="#">更多</a>
+            </div>
+            <ul>
+                <li class="clearfix" ng-repeat="item in luntan">
+                    <a href="{{item.herf}}" target="_blank"><i></i>{{item.title}}</a>
+                    <p style="background:url({{item.src}}) no-repeat right">{{item.zuoze}}</p>
+                </li>
+
+            </ul>
+            <ol class="clearfix">
+                <li><a href="#">卖车&评估</a></li>
+                <li><a href="#">买车&养车</a></li>
+                <li><a href="#">购车推荐</a></li>
+                <li><a href="#" class="last">新手攻略</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="page3 inner">
+    <ol class="clearfix">
+        <li ng-repeat="item in arrshowcar" ng-click="show1($index)"  ng-class="{active:$index==show2}" >{{item.fenlei}} <b ng-class="{show:$index==show2}"></b></li>
+
+        <!--<li class="active">急售<b class="show"></b></li>-->
+
+    </ol>
+    <ul class="clearfix">
+        <li ng-repeat="item in arrshowcar[show2].neirong">
+            <a href="{{item.herf}}">
+                <div class="img">
+                    <img src="{{item.src}}" alt=""/>
+                    <p></p>
+                </div>
+                <h3>{{item.title}}</h3>
+                <p class="p3">{{item.time}}<span class="juse-bj">急售</span></p>
+                <div class="bottom clearfix">
+                    <div class="jiage">
+                        <p class="p1">{{item.jiage}}<span>万</span></p>
+                        <p class="p2">新车价 <b>{{item.xinchejia}}</b>万</p>
+                    </div>
+                    <p class="btn">
+                        砍价
+                    </p>
+                </div>
+            </a>
+        </li>
+
+    </ul>
+    <div class="more1"><a href="#" class="more">查看更多</a></div>
+</div>
+<div class="page4">
+    <div class="page4-1">
+        <div class="inner clearfix">
+            <div class="left">
+                <div class="top clearfix">
+                    <h3>车主故事 <a>更多</a></h3>
+                    <div class="btn clearfix">
+                        <a class="iconfont icon-prev"></a>
+                        <ol>
+                            <li class="active" ng-repeat="i in gushi"></li>
+                        </ol>
+                        <a class="iconfont icon-202-copy"></a>
+                    </div>
+                </div>
+                <div class="bottom" ng-xuan>
+                    <ul class="clearfix" >
+                        <li ng-repeat="i in gushi">
+                            <div class="cont">
+                                <img src="{{i.src}}" alt=""/>
+                                <div class="test">
+                                    <h4>{{i.title}}</h4>
+                                    <p class="p1">{{i.msg}}</p>
+                                </div>
+                            </div>
+                            <div class="cont right">
+                                <img src="{{i.src1}}" alt=""/>
+                                <div class="test">
+                                    <h4>{{i.title1}}</h4>
+                                    <p class="p1">{{i.msg1}}</p>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="left1">
+                <h2>媒体报道</h2>
+                <ul>
+                    <li ng-repeat="i in news|orderBy : '-id' | limitTo: 5""><a href="{{i.herf}}"> <i></i>{{i.title}}</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="inner">
+        <ul class="ul1 clearfix">
+            <li><img src="img/a11.png" alt=""/></i>一年两万公里质保</li>
+            <li><img src="img/a12.png" alt=""/></i>14天可退</li>
+            <li><img src="img/a13.png" alt=""/></i>249项检测</li>
+            <li><img src="img/a9.png" alt=""/>100%个人车源</li>
+            <li><img src="img/a10.png" alt=""/></i>一站式服务</li>
+        </ul>
+        <div class="menu clearfix ">
+            <dl>
+                <dt> 关于我们</dt>
+                <dd><a href="#">公司介绍</a></dd>
+                <dd><a href="#">联系我们</a></dd>
+                <dd><a href="#">加入我们</a></dd>
+            </dl>
+            <dl>
+                <dt>交易流程</dt>
+                <dd><a href="#">买车流程</a></dd>
+                <dd><a href="#">卖车流程</a></dd>
+                <dd><a href="#">异地购车</a></dd>
+            </dl>
+            <dl>
+                <dt>新手购车指南</dt>
+                <dd><a href="#">新车VS二手车</a></dd>
+                <dd><a href="#">选车注意事项</a></dd>
+                <dd><a href="#">过户手续办理</a></dd>
+            </dl>
+            <dl class="last">
+                <dt>二手车精选</dt>
+                <dd style="width: 58px;"><a href="#">车型库</a></dd>
+                <dd><a href="#">二手车估价</a></dd>
+                <dd><a href="#">二手车资讯</a></dd>
+                <dd><a href="#">二手车迁入标准</a></dd>
+                <dd><a href="#">二手车贷款</a></dd>
+                <dd><a href="#">二手车问答</a></dd>
+            </dl>
+            <div class="weixin">
+                <img src="img/b2.png" alt=""/>
+                <p>关注微信</p>
+            </div>
+            <div class="weixin app">
+                <img src="img/b3.png" alt=""/>
+                <p>下载APP</p>
+            </div>
+            <div class="lianxi">
+                <h5>400-861-0500</h5>
+                <p>免费咨询(咨询、建议、投诉)</p>
+                <p>周一至周六 9:00-19:00</p>
+                <ul>
+                    <li><a href="#"><img src="img/b6_2.png">官方微信</a></li>
+                    <li><a href="#"><img src="img/b6_5.png">官方微博</a></li>
+                    <li><a href="#"><img src="img/b6_3.png">官方论坛</a></li>
+                    <li><a href="#"><img src="img/b6_4.png">举报事故车</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="zmxz clearfix">
+           <h3>按字母查找</h3>
+            <ul class="clearfix">
+                <li ng-repeat="i in arrBrand1"><a href="">{{i.shouzim}}</a> </li>
+                <li ng-repeat="i in arrBrand2"><a href="">{{i.shouzim}}</a> </li>
+
+            </ul>
+        </div>
+
+        <div class="footer1">
+            <ol class="clearfix">
+                <li class="active">北京二手车</li>
+                <li>热门城市</li>
+                <li>热门品牌</li>
+                <li>热门车系</li>
+                <li>手机找二手车</li>
+                <li>友情链接</li>
+            </ol>
+            <ul >
+                <li class="show"><p>北京二手车，人人北京二手频道。专注北京个人二手车，提供大量真实、优质的北京个人二手出售转让信息，供您选择。我们致力于打造专业北京二手车交易市场，所以每辆二手车，都经过我们的二手车检测师专业、全面、权威的检测！购买北京二手车，就上人人车北京频道。 北京二手车触屏版。</p></li>
+                <li class="clearfix ">
+                    <a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a>
+                </li>
+                <li class="clearfix">
+                    <a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a>
+                </li>
+                <li class="clearfix">
+                    <a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a>
+                </li >
+                <li class="clearfix">
+                    <a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a>
+                </li>
+                <li class="clearfix">
+                    <a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a><a href="#">成都二手车</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer2">
+    <p>Copyright © 2017, renrenche.com, All Rights Reserved  京公网安备 11010802015302号  京ICP证160608号</p>
+</div>
+<div class="fix1">
+    <div class="dianhua">
+        <img src="img/1.gif" alt=""/>
+        免费电话
+    </div>
+    <div class="app active">
+        <img src="img/b7.png" alt=""/>
+        APP
+        <div class="erweima show">
+            <p >下载APP</p>
+            <img src="img/c1.png" alt=""/>
+            <p>新上好车，实时提醒</p>
+            <span></span>
+        </div>
+    </div>
+    <div class="gongzuohao">
+        <img src="img/b8.png" alt=""/>
+        公众号
+        <div class="erweima">
+            <p >下载APP</p>
+            <img src="img/c1.png" alt=""/>
+            <p>新上好车，实时提醒</p>
+            <span></span>
+        </div>
+    </div>
+    <div class="top">
+        <img src="img/b9.png" alt=""/>
+    </div>
+</div>
+</body>
+</html>

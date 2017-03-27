@@ -1,0 +1,42 @@
+.wrap{ position: relative; min-height:100vh;}
+.sidebar{ width: 132px; float: left; }
+.content{ margin-left: 132px; }
+header{ height: 80px; background: #3b6ea5;}
+header .logo{width: 132px;  margin-top: 20px; text-align: center ;}
+header .content{ padding: 16px 36px 0 10px;}
+header .content .left{ float: left;}
+header .left p{ color:#fff;}
+header .left ul{ margin-bottom: 0;}
+header .left li{ float:left; padding: 10px; margin-top: 10px; border-radius: 2px 2px 0 0; box-shadow: 0px 0px 54px -13px #000; background: #548ac6; margin-left: 10px; color: #fff;}
+header .left li.active{ background:linear-gradient( #fff,#e0eaeb); color: #333;}
+header  .right{ float: right; color: #fff; margin-top: 16px;}
+header  .right a{ color: #fff;}
+.page1{ height: calc(100vh - 80px);}
+.page1 .sidebar{ padding-left: 8px; padding-top: 10px; border-right: 1px solid #dce2e2; height: 100%;}
+.page1 .sidebar h2{  line-height:30px; border-bottom: 1px solid #dce2e2; font-size: 18px; color: #124a85; margin: 0; background: url("../img/z2.png") no-repeat 100px;}
+.page1 .sidebar ul{  padding-top: 10px;}
+.page1 .sidebar ul li{ line-height: 26px; }
+.page1 .sidebar ul li a.active{ background: #4988cf; color: #fff; }
+.page1 .sidebar ul li a{font-size: 14px;padding: 3px 8px}
+.page1 .content{ background: #e0eaeb;min-height: calc(100vh - 80px); padding: 10px;box-sizing: border-box;}
+.page1 .weizhi{ padding-left: 16px; background: url("../img/z1.jpg") no-repeat;}
+.page1 .weizhi a{ color: #333;}
+.page1 .cont{ width: 100%; min-height: calc(100vh - 80px);  background: #fff; border: 1px solid #cdd1d4; padding: 12px 10px;}
+.page1 .btn{ margin-bottom: 10px;}
+.page1 .btn a{ padding:4px  8px; border-radius: 2px;}
+.page1 .btn a.active{ background: #5287d3;  color: #fff;}
+.page1 .user tr{ border: 1px solid #333;}
+.page1 .user tr td,.page1 .user tr th{border: 1px solid #333; text-align: center;}
+.page1 .user tr th{ background: #cecece;}
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #eaeaea;}
+.page1 .table .del{ padding: 4px 20px; background:#3c6ea3; color: #fff; border-radius: 10px; cursor: pointer;}
+
+.denglu{ width: 400px; height:300px; background: #fff; border: 1px solid #ccc; position: fixed; left: 50%; top: 50%; margin-left: -200px; margin-top: -150px; z-index: 999; padding: 20px; }
+.denglu h3{ text-align: center; font-size: 22px; font-weight: bold; margin-top: 20px; margin-bottom: 20px;}
+.denglu  input{ display: block; border: 1px solid #ccc; background: #fff;  width: 80%; height: 40px; padding-left: 10px; margin: 0 auto;margin-bottom: 20px;}
+.denglu input[type=button] {  color: #fff;  background:#4988cf; width: 336px; margin-top: 30px;  }
+.zhuce{  z-index: 1000; height:400px; margin-top: -200px;}
+.denglu a{ position:absolute; right: 10px; top:10px; font-size: 16px; cursor: pointer;}
+.mengban{ position: fixed; left: 0; top: 0; z-index: 500; width: 100%; height: 100%;background: rgba(0,0,0,.6);}
+

@@ -1,0 +1,234 @@
+
+<!doctype html>
+<html ng-app="app">
+<head>
+<meta charset="utf-8">
+<title>人人车后台-人人车</title>
+<link href="css/base.css" rel="stylesheet"/>
+<link href="css/common.css" rel="stylesheet"/>
+<link href="css/admin.css" rel="stylesheet"/>
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<link href="iconfont/iconfont.css" rel="stylesheet"/>
+<script src="js/angular.js"></script>
+<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+<script src="js/admin.js"></script>
+</head>
+<body ng-controller="admin">
+<div class="wrap" >
+    <header class="clearfix">
+        <div class="sidebar ">
+            <div class="logo">
+                <img src="img/logo.png" alt=""/>
+            </div>
+        </div>
+        <div class="content clearfix">
+            <div class="left">
+                <p>您好！phpcms[超级管理员] [退出]</p>
+                <ul class="clearfix">
+                    <li>我的面板</li>
+                    <li class="active">设置</li>
+                </ul>
+            </div>
+            <div class="right">
+                <img src="img/z1.png" alt=""/>
+                <a href="#">锁屏</a>
+                |
+                <a href="#">官方网站</a>
+            </div>
+        </div>
+    </header>
+    <div class="clearfix page1">
+        <div class="sidebar ">
+            <h2 ng-click="d=!d">相关设置</h2>
+            <ul ng-show="d">
+                <li  ng-repeat="i in arr_celan" ng-click="getnow($index)" ><a ng-class="{active:$index==now}" href="#" >{{i}}</a></li>
+
+            </ul>
+        </div>
+        <div class="content">
+            <p class="weizhi">当前位置：<a href="">设置</a>><a href="">{{bbb}}设置</a>><a href="">{{bbb}}</a></p>
+            <ol>
+                <li class="cont" ng-show="now==0">
+                    <div class="btn">
+                        <a href="" ng-class="{active:bOk}" ng-click="addclass()">{{bbb}}</a>
+                        |
+                        <a href="#"  ng-class="{active:bOk1}" ng-click="addclass1()" >添加{{bbb}}</a>
+                    </div>
+                    <table  class="table  table-striped user">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>年龄</th>
+                            <th>性别</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="i in user_data" >
+                            <td>{{i.id}}</td>
+                            <td>{{i.username}}</td>
+                            <td>{{i.password}}</td>
+                            <td>{{i.age}}</td>
+                            <td>{{i.sex|sex}}</td>
+                            <td data-toggle="modal" data-target="#myModal" ng-click="mask(i.id)" ><span class="del">删除</span></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">确认删除么？</h4>
+                                </div>
+                                <div class="modal-body text-right">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="user_del()">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zhuce denglu" ng-show="bOk1">
+                        <h3>添加管理员</h3>
+                        <input type="text" placeholder="请输入用户名" ng-model="t3" >
+                        <input type="text" placeholder="请输入密码" ng-model="t4">
+                        <input type="text" placeholder="请输入年龄" ng-model="t5" >
+                        <input type=" text" placeholder="请输入性别" ng-model="t6" >
+                        <input type="button" value="立即添加"  ng-click="sign()">
+                        <a ng-click="addclass()">x</a>
+                    </div>
+                    <div class="mengban" ng-show="bOk1"></div>
+                </li>
+                <li ng-show="now==1" class="cont">
+                    <div class="btn">
+                        <a href="" ng-class="{active:bOk}" ng-click="addclass()">{{bbb}}</a>
+                        |
+                        <a href="#"  ng-class="{active:bOk1}" ng-click="addclass1()" >添加{{bbb}}</a>
+                    </div>
+                    <table  class="table  table-striped user">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>城市名</th>
+                            <th>首字母</th>
+                            <th>周边城市</th>
+                            <th>热门城市</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="i in city_data" >
+                            <td>{{i.id}}</td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.shouzimu}}</td>
+                            <td>{{i.zhoubian}}</td>
+                            <td>{{i.cityhot}}</td>
+                            <td data-toggle="modal" data-target="#myModal1" ng-click="mask(i.id)" ><span class="del">删除</span></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="myModal1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">确认删除么？</h4>
+                                </div>
+                                <div class="modal-body text-right">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="city_del()">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zhuce denglu" ng-show="bOk1">
+                        <h3>添加城市</h3>
+                        <input type="text" placeholder="请输入城市名" ng-model="t7" >
+                        <input type="text" placeholder="请输入首字母" ng-model="t8">
+                        <input type="text" placeholder="是否是周边" ng-model="t9" >
+                        <input type=" text" placeholder="是否是热门" ng-model="t10" >
+                        <input type="button" value="立即添加"  ng-click="add_city()">
+                        <a ng-click="addclass()">x</a>
+                    </div>
+                    <div class="mengban" ng-show="bOk1"></div>
+                </li>
+
+                <li ng-show="now==2">
+                    <div class="btn">
+                        <a href="" ng-class="{active:bOk}" ng-click="addclass()">{{bbb}}</a>
+                        |
+                        <a href="#"  ng-class="{active:bOk1}" ng-click="addclass1()" >添加{{bbb}}</a>
+                    </div>
+                    <table  class="table  table-striped user">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>title</th>
+                            <th>src</th>
+                            <th>herf</th>
+                            <th>背景色</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="i in banner_data" >
+                            <td>{{i.id}}</td>
+                            <td>{{i.title}}</td>
+                            <td>{{i.src}}</td>
+                            <td>{{i.herf}}</td>
+                            <td>{{i.beijing}}</td>
+                            <td data-toggle="modal" data-target="#myModal2" ng-click="mask(i.id)" ><span class="del">删除</span></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="myModal2" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">确认删除么？</h4>
+                                </div>
+                                <div class="modal-body text-right">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="banner_del()">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zhuce denglu" ng-show="bOk1">
+                        <h3>添加广告</h3>
+                        <input type="text" placeholder="广告名称" ng-model="t11" >
+                        <input type="text" placeholder="图标地址" ng-model="t12">
+                        <input type="text" placeholder="链接地址" ng-model="t13" >
+                        <input type=" text" placeholder="背景颜色" ng-model="t14" >
+                        <input type="button" value="立即添加"  ng-click="add_banner()">
+                        <a ng-click="addclass()">x</a>
+                    </div>
+                    <div class="mengban" ng-show="bOk1"></div>
+                </li>
+                <li ng-show="now==3">55555555555555555</li>
+                <li ng-show="now==4">66666666666666666666</li>
+                <li ng-show="now==5">7777777777777</li>
+                <li ng-show="now==6">888888888888888888</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
